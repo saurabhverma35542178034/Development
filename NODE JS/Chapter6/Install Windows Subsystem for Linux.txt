@@ -1,0 +1,6 @@
+1. jab hum server pe code deply krte hai toh humko Linux ke file system se kaam krna
+padta hai
+
+2. wsl --install 
+download linux terminal
+

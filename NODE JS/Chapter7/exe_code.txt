@@ -1,0 +1,13 @@
+Saari files executlable hot ia hai jisme hum command likhe hote hai
+ kuch exception hai jo aange dekhnge.
+
+
+Wo files executbale hoti hai jinko executable ki permission di jati hai.
+
+
+**Executable files
+    1.Script Executable files.
+    2.Binary Executable files.
+
+
+

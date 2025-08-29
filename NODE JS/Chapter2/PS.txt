@@ -1,0 +1,6 @@
+echo PS1
+echo PS2
+PS1=Saurabh
+PS2=Verma
+
+EC

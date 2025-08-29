@@ -1,0 +1,9 @@
+Method	  Description	     Use Case
+
+exec()	Spawns a shell and executes a command, buffering the output	When you need to run a shell command and get the entire output at once
+
+execFile()	Similar to exec() but doesn't spawn a shell	More efficient for executing file-based commands without shell interpretation
+
+spawn()	Spawns a new process without creating a shell, with streaming I/O	When dealing with long-running processes or large output
+
+fork()	A special case of spawn() for creating Node.js processes	When you need to run another Node.js module as a separate process with IPC

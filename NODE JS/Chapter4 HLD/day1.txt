@@ -1,0 +1,28 @@
+############
+smtp - sending a mail
+Imap- receving or accesing or reading a mail.
+
+
+######################
+The key difference between client-server and peer-to-peer (P2P) networks lies in how devices communicate and share resources.
+
+1. **Client-Server Model**:
+   - Involves a **central server** that provides services or data to multiple **clients**.
+   - Clients request information, while the server processes and responds to those requests.
+   - Typically used in businesses, websites, and cloud-based services.
+   - Example: A website where users (clients) access pages stored on a server.
+
+2. **Peer-to-Peer (P2P) Model**:
+   - Involves devices communicating **directly** without a central server.
+   - Each device (peer) can act as both a client and a server, sharing resources among them.
+   - Often used in file-sharing applications and decentralized networks.
+   - Example: Torrenting, where users share files directly with each other.
+
+Client-server networks are structured and centralized, while P2P networks are decentralized and often more flexible. The choice depends on security, scalability, and efficiency needs. Do you need help deciding which model fits a specific scenario?
+
+
+###################
+TCP and UDP
+
+TCP - isme connection built hota hai , data chunks ka order maintain hota hai , aur data receive hojaye to wo acknodlgemnt hota hai
+UDP - isme connection nhi built hota hia , data ka order nhi hota aur acknodlgemnt nhi hota hai but ye faster hota hia  aur ye kaam ata hai Video calls or live streaming k lie

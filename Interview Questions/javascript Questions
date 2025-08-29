@@ -1,0 +1,689 @@
+1. Local , session storage and cokkies?
+    🌐 Local Storage, Session Storage, and Cookies
+    1. Local Storage
+
+    Definition: A browser storage mechanism that lets you store data persistently (until explicitly deleted).
+
+    Capacity: ~5–10 MB (varies by browser).
+
+    Expiry: Never expires automatically. Data stays even after browser is closed.
+
+    Access: Only accessible on the client side (JavaScript).
+
+    Use Case:
+
+    Storing user preferences (theme, language, layout settings).
+
+    Saving cart items for e-commerce (persist after refresh).
+
+    2. Session Storage
+
+    Definition: Similar to localStorage, but data is stored per browser tab/window session.
+
+    Capacity: ~5 MB.
+
+    Expiry: Data is cleared when the tab/browser is closed.
+
+    Access: Client-side only.
+
+    Use Case:
+
+    Storing temporary form data while the user is filling it.
+
+    Saving state for a single session (e.g., quiz answers until submission).
+
+    3. Cookies
+
+    Definition: Small text files stored in the browser that can be accessed by both client and server.
+
+    Capacity: Very small (around 4 KB).
+
+    Expiry: Can be set (e.g., 1 day, 1 month, etc.).
+
+    Access: Client-side (JavaScript) and server-side (sent with HTTP requests).
+
+    Use Case:
+
+    Storing authentication tokens / session IDs (because they travel with every HTTP request).
+
+    Remembering logged-in users.
+
+    Tracking user activity (analytics, personalization).
+
+    🔑 Key Differences
+    Feature	Local Storage	Session Storage	Cookies
+    Capacity	5–10 MB	~5 MB	~4 KB
+    Expiry	Never (until cleared)	On tab/browser close	Configurable by server/dev
+    Accessible by	Client (JavaScript)	Client (JavaScript)	Client + Server
+    Sent with requests	❌ No	❌ No	✅ Yes (HTTP headers)
+    Best For	Preferences, caching	Temporary session data	Authentication, tracking
+    ✅ How to Answer in Interview (Short & Smart)
+
+    “LocalStorage, SessionStorage, and Cookies are all used to store data in the browser, but they differ in size, scope, and lifetime.
+
+    LocalStorage stores data permanently until cleared, good for user preferences or caching.
+
+    SessionStorage lasts only for the session or tab, good for temporary data like form inputs.
+
+    Cookies are small, can be set to expire, and are accessible on both client and server, making them ideal for authentication tokens and user sessions.”
+    Perfect 👌 These are **very common tricky follow-ups** around storage in frontend interviews. Let’s prepare clear, short answers so you sound confident:
+
+    ---
+
+    ### 🔹 **Q1: Why not store JWT (auth token) in LocalStorage?**
+
+    👉 **Answer:**
+    LocalStorage is accessible via JavaScript, so if the site is vulnerable to **XSS (Cross-Site Scripting)**, attackers can steal the token. That’s why storing sensitive data like JWT in LocalStorage is not recommended.
+
+    ✅ Best practice: Store JWT in **HTTP-only cookies** (they can’t be accessed via JS, so safer).
+
+    ---
+
+    ### 🔹 **Q2: Which is more secure: Cookies or LocalStorage?**
+
+    👉 **Answer:**
+
+    * **Cookies (HTTP-only, Secure, SameSite)** → More secure for authentication since they aren’t exposed to JavaScript.
+    * **LocalStorage/SessionStorage** → Easier for client-side usage but vulnerable to XSS.
+
+    So, for sensitive info like tokens, cookies are safer. For non-sensitive preferences, Local/Session storage is fine.
+
+    ---
+
+    ### 🔹 **Q3: When would you use SessionStorage over LocalStorage?**
+
+    👉 **Answer:**
+    When you only need the data **for one session/tab** — for example, storing temporary form data, quiz answers, or a step in checkout flow.
+    LocalStorage would be overkill because it persists even after closing the browser.
+
+    ---
+
+    ### 🔹 **Q4: Do cookies slow down performance?**
+
+    👉 **Answer:**
+    Yes, a little. Because cookies are sent to the server with **every HTTP request**, large cookies can increase network overhead.
+    That’s why cookies should be kept small (like session ID only), while larger data should go in Local/SessionStorage.
+
+    ---
+
+    ### 🔹 **Q5: Can we use both cookies and LocalStorage together?**
+
+    👉 **Answer:**
+    Yes. Example:
+
+    * Store the **auth token** in an HTTP-only cookie (for security).
+    * Store **UI preferences** (theme, layout, etc.) in LocalStorage.
+    This balances **security and performance**.
+
+    ---
+    “Yes, if LocalStorage is full and we try to add new data, it won’t be saved and will throw a QuotaExceededError. That’s why in real-world apps, critical data like a shopping cart is usually stored on the server or database, while LocalStorage is used only for temporary or non-critical information.”
+
+    
+2. Var , let , const?
+
+    ### **Answer (short version):**
+
+    In JavaScript, `var`, `let`, and `const` are used to declare variables, but their scope and mutability are different.
+
+    * `var` → function scoped, can be redeclared, and hoisted.
+    * `let` → block scoped, can be updated but not redeclared.
+    * `const` → block scoped, can’t be updated or redeclared (but objects/arrays inside it can still be modified).
+
+    ---
+
+    ### **Answer (practical + project example):**
+
+    In my projects, I mostly use `let` and `const` because `var` creates issues due to its function scope and hoisting.
+
+    👉 Example:
+
+    * For values that don’t change, like API base URLs or configuration constants → I use `const`.
+
+    ```js
+    const API_BASE_URL = "https://api.myapp.com";
+    ```
+
+    * For variables that might change, like form inputs, cart items, or states in React → I use `let`.
+
+    ```js
+    let cartCount = 0;
+    cartCount += 1;
+    ```
+
+    * I rarely use `var` in real-world code, because it can be redeclared and cause bugs. For example:
+
+    ```js
+    var name = "Saurabh";
+    var name = "Verma"; // redeclaration allowed, can create confusion
+    ```
+
+    ---
+
+    ### **Interview Closing Line:**
+
+    “In real-world frontend projects, I almost never use `var`. I rely on `const` for fixed values and `let` for variables that need reassignment, which makes the code more predictable and easier to debug.”
+
+    ---
+
+    ⚡ Ye answer sunke interviewer ko lagega ki tu **sirf theory nahi, project me practically kaam kar chuka hai**.
+
+3. What is hoisting?
+    👉 JS execution ke time variables aur functions top pe move ho jate hain.
+    Eg: Agar mai var x=10; likhta hu toh hoist ho jata hai but let/const hoist hote hain par unko access karne pe error aata hai (TDZ).
+
+4. What is closure?
+    👉 Function ke andar function jo outer scope ke variables ko access kare even after parent execution is finished.
+    Project Example: Form validation mai ek closure banaya jo multiple fields validate karta tha based on same regex.
+    Absolutely, VAIBHAV—this is a textbook example of **closures** in JavaScript, and you're already halfway to mastering it. Let’s break it down step by step so you can explain it confidently in interviews or use it in your own projects.
+
+
+
+    ## 🧠 What Is a Closure?
+
+    A **closure** is a function that:
+    - **Remembers** the variables from its outer (enclosing) scope,
+    - Even **after** that outer function has finished executing.
+
+    It’s like the inner function keeps a backpack of variables it can access, even when the outer function is long gone.
+
+    ---
+
+    ## 🔍 Breakdown of Your Code
+
+    ```js
+    function outer() {
+    let count = 0; // This variable lives in outer's scope
+    return function inner() {
+        count++;     // inner still has access to count
+        return count;
+    }
+    }
+
+    const counter = outer(); // outer runs, returns inner
+    console.log(counter());  // 1
+    console.log(counter());  // 2
+    ```
+
+    ### ✅ What’s Happening
+
+    1. `outer()` is called → it creates `count = 0` and returns `inner`.
+    2. `counter` now holds a reference to `inner`, **not just the function, but also its closure**—which includes `count`.
+    3. When `counter()` is called:
+    - It accesses `count` from the closure.
+    - Increments it.
+    - Returns the updated value.
+
+    Even though `outer()` has finished executing, `count` is **preserved** because `inner()` still references it.
+
+    
+
+    ## 🧠 Why This Works
+
+    JavaScript uses **lexical scoping**, meaning functions remember the scope in which they were defined—not where they’re called. So `inner()` always has access to `count`, because it was defined inside `outer()`.
+
+    
+
+    ## 🧪 Real-World Use Case
+
+    Closures are perfect for:
+    - Creating **private variables** (like `count` here)
+    - Building **custom counters**, **event handlers**, or **stateful utilities**
+    - Avoiding global variables while preserving state
+
+    ---
+
+    ## 🧠 Interview-Ready Summary
+
+    > "A closure allows a function to retain access to its outer scope even after the outer function has returned. In this example, `inner()` keeps access to `count` from `outer()` via closure, enabling persistent state across multiple calls."
+
+
+5. Event Loop?
+    👉 JS single-threaded hai. Event loop manage karta hai sync + async tasks (callback queue, microtask queue).
+    Project Example: Jab API call hit karta hu aur UI responsive rehta hai, wo event loop ke wajah se hota hai.
+
+6. Promise vs async/await?
+    👉 Promise is object that handles async result. Async/await makes it synchronous looking code.
+    Project Example: API fetch karne ke liye async/await use kiya login/logout aur refresh token ke liye.
+
+7. map vs forEach?
+    👉 map return new array, forEach kuch return nahi karta.
+    Project Example: Tickets list ko render karne ke liye map use kiya.
+
+8. Debounce vs Throttle?
+    👉 Debounce ek function ko delay karta hai until user stops typing. Throttle ek interval ke gap ke baad hi allow karta hai.
+    Project Example: Search bar mai debounce use kiya, scroll tracking mai throttle.
+
+9. Event Delegation?
+    👉 Parent pe listener lagana instead of multiple child elements.
+    Project Example: Dynamic table mai delete/edit button ke liye delegation.
+
+10. Call, Apply, Bind difference?
+    👉 call direct args deta hai, apply array ke form me, bind new function return karta hai.
+
+11. == vs ===?
+    👉 == value compare karega type conversion ke sath, === strict check karega.
+
+12. What is this keyword?
+    👉 Context dependent hota hai. Object ke andar function me object ko point karega, global scope me window ko.
+
+13. Prototype & Inheritance?
+    👉 JS me objects prototype chain ke through inherit karte hain.
+
+14. What is async defer in script tag?
+👉 async script parallel download + execution, defer parallel download but execution after DOM load.
+
+15. Shallow vs Deep Copy?
+    👉 Shallow copy sirf reference copy karta hai, deep copy pura data copy karta hai.
+
+16. Rest vs Spread operator?
+    👉 Rest collect karta hai multiple args, Spread expand karta hai.
+
+17. How to handle API errors?
+    👉 Try/catch with proper error state.
+    Project Example: API fail hone par toast notification dikhaya.
+
+18. Null vs Undefined?
+    👉 null is intentional absence, undefined means not assigned.
+
+19. LocalStorage vs SessionStorage vs Cookies?
+    👉 LocalStorage persistent, SessionStorage tab close hone pe delete, Cookies lightweight but server ke sath send hote hain.
+    Project Example: Authentication token ke liye HTTP-only cookie use kiya (secure).
+
+20. Why is JS single-threaded?
+    👉 Because of simplicity + event loop handling async.
+
+21. Modules in JS (ES6 import/export)?
+    👉 Code reuse ke liye use hota hai.
+
+22. Difference between splice , slice and substring?
+    
+    ## 🧠 Quick Comparison Table
+
+    | Method       | Works On     | Mutates Original? | Returns         | Use Case                          |
+    |--------------|--------------|-------------------|------------------|-----------------------------------|
+    | `slice()`    | Arrays & Strings | ❌ No          | New array or string | Extract without changing original |
+    | `splice()`   | Arrays only     | ✅ Yes         | Removed items (array) | Add/remove items from array       |
+    | `substring()`| Strings only    | ❌ No          | New string         | Extract part of a string          |
+
+    ---
+
+    ## 🔍 `slice()` – Non-Destructive Extractor
+
+    ### ✅ Works on: Arrays & Strings  
+    ### ❌ Does NOT modify original  
+    ### 📦 Returns: A new array or string
+
+    ```js
+    const arr = [1, 2, 3, 4, 5];
+    console.log(arr.slice(1, 4)); // [2, 3, 4]
+    console.log(arr);            // [1, 2, 3, 4, 5] (unchanged)
+
+    const str = "JavaScript";
+    console.log(str.slice(4, 10)); // "Script"
+    ```
+
+    ---
+
+    ## 🔧 `splice()` – Destructive Modifier (Arrays Only)
+
+    ### ✅ Works on: Arrays  
+    ### ✅ Modifies original array  
+    ### 📦 Returns: Removed elements
+
+    ```js
+    const arr = [1, 2, 3, 4, 5];
+    const removed = arr.splice(2, 2); // Remove 2 items starting at index 2
+    console.log(removed); // [3, 4]
+    console.log(arr);     // [1, 2, 5] (modified)
+    ```
+
+    You can also **insert** items:
+    ```js
+    arr.splice(1, 0, "a", "b"); // Insert at index 1
+    console.log(arr); // [1, "a", "b", 2, 5]
+    ```
+
+    ---
+
+    ## ✂️ `substring()` – String Extractor
+
+    ### ✅ Works on: Strings only  
+    ### ❌ Does NOT modify original  
+    ### 📦 Returns: New string
+
+    ```js
+    const str = "JavaScript";
+    console.log(str.substring(4, 10)); // "Script"
+    ```
+
+    🔸 Difference from `slice()`:
+    - `substring()` swaps indices if `start > end`
+    - `slice()` does not
+
+    ```js
+    str.slice(10, 4);      // "" (empty string)
+    str.substring(10, 4);  // "Script" (swaps indices)
+    ```
+
+    ---
+
+    ## 🧠 Interview-Ready Summary
+
+    > "`slice()` and `substring()` are non-mutating methods for extracting parts of arrays or strings. `splice()` is array-specific and modifies the original array—great for adding or removing items. Understanding their differences is key to writing clean, predictable code."
+
+
+
+
+
+23. Shift and Unshift?
+    
+
+    ## 🔄 `shift()` – Remove First Element
+
+    - Removes the **first element** of an array
+    - **Mutates** the original array
+    - Returns the removed element
+
+    ### 🧪 Example:
+    ```js
+    const arr = [10, 20, 30];
+    const first = arr.shift();
+
+    console.log(first); // 10
+    console.log(arr);   // [20, 30]
+    ```
+
+    ---
+
+    ## ➕ `unshift()` – Add to Beginning
+
+    - Adds one or more elements to the **start** of an array
+    - **Mutates** the original array
+    - Returns the **new length** of the array
+
+    ### 🧪 Example:
+    ```js
+    const arr = [20, 30];
+    const newLength = arr.unshift(5, 10);
+
+    console.log(newLength); // 4
+    console.log(arr);       // [5, 10, 20, 30]
+    ```
+
+    ---
+
+    ## 🧠 Interview-Ready Summary
+
+    > "`shift()` removes the first item from an array and returns it, while `unshift()` adds items to the beginning and returns the new length. Both modify the original array and are useful when working with queues or prepending data."
+
+24. Spread vs Rest?
+    Great one, VAIBHAV! The **rest** and **spread** operators in JavaScript both use the same syntax (`...`), but they serve **opposite purposes** depending on context. Let’s break it down clearly so you can explain it like a pro in interviews and use it confidently in your code.
+
+    ---
+
+    ## 🔄 Syntax: `...` (Three Dots)
+
+    Same symbol, **two different roles**:
+
+    | Operator     | Purpose                        | Context Used In         |
+    |--------------|--------------------------------|--------------------------|
+    | `rest`       | **Collects** multiple values into one | Function parameters, destructuring |
+    | `spread`     | **Expands** one value into multiple | Function calls, array/object literals |
+
+    ---
+
+    ## 🧳 Rest Operator – "Pack It Up"
+
+    ### ✅ Used to **gather** remaining values into an array or object
+
+    ### 📦 Function Parameters
+    ```js
+    function sum(...numbers) {
+    return numbers.reduce((a, b) => a + b, 0);
+    }
+
+    sum(1, 2, 3); // 6
+    ```
+
+    ### 📦 Array Destructuring
+    ```js
+    const [first, ...rest] = [10, 20, 30, 40];
+    console.log(first); // 10
+    console.log(rest);  // [20, 30, 40]
+    ```
+
+    ### 📦 Object Destructuring
+    ```js
+    const { name, ...details } = { name: "Vaibhav", age: 25, city: "Rae Bareli" };
+    console.log(details); // { age: 25, city: "Rae Bareli" }
+    ```
+
+    ---
+
+    ## 🎯 Spread Operator – "Break It Out"
+
+    ### ✅ Used to **expand** arrays or objects into individual elements
+
+    ### 📦 Function Calls
+    ```js
+    const nums = [1, 2, 3];
+    Math.max(...nums); // 3
+    ```
+
+    ### 📦 Array Literals
+    ```js
+    const arr1 = [1, 2];
+    const arr2 = [...arr1, 3, 4];
+    console.log(arr2); // [1, 2, 3, 4]
+    ```
+
+    ### 📦 Object Literals
+    ```js
+    const base = { a: 1, b: 2 };
+    const extended = { ...base, c: 3 };
+    console.log(extended); // { a: 1, b: 2, c: 3 }
+    ```
+
+    ---
+
+    ## 🧠 Interview-Ready Summary
+
+    > "`rest` collects multiple values into a single variable—great for flexible function arguments and destructuring. `spread` expands values—perfect for copying, merging, or passing elements individually. They use the same syntax but serve opposite roles depending on context."
+
+25. Execution Context?
+ javascript is a synchronus single threaded language.
+ single threaded language(single threaded means runs one command at a time and in a specififc order)
+
+    When we run a program in JS , then Execution context is formed.
+
+    Suppose we run a program a Global Execution Context is created. It has 2 components - 
+    1.memory Creation phase
+    2.code Execution code
+
+    After all the code executes and Execution context will get deleted
+
+    https://www.youtube.com/watch?v=iLWTnMzWtj4&list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP
+
+
+    ** So how these things are managed by JS : this is done by Call stack
+    When ever a js code run and Global Exection context puts in a Call stack
+
+    This video provides an in-depth explanation of **how the JavaScript engine executes code** by creating **Execution Contexts** and managing them using the **Call Stack**. Let's break this down step by step for a deeper understanding.
+
+
+        ### **1. What is an Execution Context?**
+
+        * **Execution Context** is a conceptual environment in which JavaScript code is executed. It holds everything JavaScript needs to run the code, including the current scope, variables, and functions.
+        * Every time you run a piece of JavaScript code, an **Execution Context (EC)** is created to manage its execution.
+
+        There are mainly **three types** of Execution Contexts:
+
+        1. **Global Execution Context (GEC)**: The default or base context. When JavaScript first starts executing, the global context is created.
+        2. **Functional Execution Context (FEC)**: Each time a function is invoked, a new execution context for that function is created.
+        3. **Eval Execution Context**: For code executed inside `eval()` (though using `eval` is generally discouraged).
+
+        ### **2. The Process of Execution Context Creation**
+
+        When you run a JavaScript program, the engine creates an **Execution Context** that has two main phases:
+
+        #### **Phase 1: Memory Creation (Creation Phase)**
+
+        * **Memory Component**: This is where the JavaScript engine **allocates memory** for all the variables and functions in the program.
+
+        * **For variables**: The engine allocates memory and sets the value to **undefined**. This is done because JavaScript has **hoisting**. The variables are hoisted to the top, but they are not initialized with their actual values until later.
+        * **For functions**: The **entire function code** is stored in memory (not just a reference). Functions are hoisted fully.
+
+        **Example:**
+
+        ```javascript
+        let n = 2;
+        function square(num) { return num * num; }
+        let square2 = square(n);
+        let square4 = square(4);
+        ```
+
+        * The memory allocation during the **creation phase** looks like this:
+
+        * `n` is allocated with value `undefined`.
+        * The `square` function code is stored (the function body).
+        * `square2` and `square4` are allocated with `undefined`.
+
+        #### **Phase 2: Code Execution Phase**
+
+        After the **creation phase**, the JavaScript engine moves into the **code execution phase**, where it actually runs the program, line by line:
+
+        * **Values are assigned to variables**.
+        * **Function invocations** are executed.
+
+        The code is run **synchronously** (in a top-down manner). For example:
+
+        1. `n = 2;` assigns the value `2` to `n`.
+        2. The engine then encounters `square2 = square(n)`, so it **invokes the function `square`**.
+
+        * A **new Execution Context** is created for this function (which will have its own memory and code components).
+
+        ### **3. Function Invocation and New Execution Context Creation**
+
+        When a function is invoked, a **new Execution Context** is created for that function. This execution context will follow the same two phases:
+
+        1. **Memory Creation Phase**: Allocate memory for parameters (like `num`), and set them to `undefined`.
+        2. **Code Execution Phase**: Execute the function's code line by line.
+
+        In our example:
+
+        ```javascript
+        function square(num) {
+        return num * num;
+        }
+        ```
+
+        * **When `square(n)` is called**:
+
+        * A new **Execution Context** (let's call it `E1`) is created for this function.
+        * Memory is allocated for the **`num` parameter** (initialized with `undefined`).
+        * **After execution**, the result (which is `4` for `2 * 2`) is returned to the caller.
+
+        ### **4. The Return of Values and Deletion of Execution Context**
+
+        * **Return Statement**: When a function completes, it may have a `return` statement to send a result back to where the function was called.
+        * Once the function finishes, its **Execution Context** (`E1` in this case) is **deleted** from memory.
+
+        For instance:
+
+        * After `square(n)` completes execution, the result (`4`) is returned, and **Execution Context E1 is popped off** the stack.
+
+        ### **5. The Call Stack: Managing Execution Contexts**
+
+        The **Call Stack** is a special data structure in JavaScript used to **manage function invocations and execution contexts**. It keeps track of the order in which execution contexts are created and deleted.
+
+        * The **Call Stack** follows a **Last In, First Out (LIFO)** principle.
+
+        * **Global Execution Context (GEC)** is at the bottom of the stack.
+        * **Function Execution Contexts (FECs)** are pushed onto the stack whenever a function is called and popped off when the function completes.
+
+        The Call Stack ensures that **JavaScript executes code in a synchronous order**. For example:
+
+        1. **Global Execution Context** (GEC) is at the bottom.
+        2. When a function is called, its **Execution Context** is pushed to the stack.
+        3. After the function finishes, its **Execution Context** is popped off the stack, and control returns to the **Global Execution Context**.
+
+        If a function calls another function (a nested function), the second function's execution context will be pushed onto the stack and so on.
+
+        ### **6. Visualizing Call Stack with Example**
+
+        Let's go through the **Call Stack** step-by-step using an example.
+
+        ```javascript
+        let n = 2;
+        function square(num) { return num * num; }
+        let square2 = square(n);
+        let square4 = square(4);
+        ```
+
+        1. **Step 1**: Run the program. The **Global Execution Context** is created and pushed to the stack.
+        2. **Step 2**: `square2 = square(n)` is executed. The **Function Execution Context** (`E1`) for `square(n)` is pushed to the stack.
+        3. **Step 3**: Inside `square(n)`, `num` is assigned `2`. The function completes and returns `4`. **E1** is popped off the stack, and the result is returned to the **Global Execution Context**.
+        4. **Step 4**: Similarly, `square4 = square(4)` is called. A new **Execution Context** (`E2`) is created, pushed onto the stack, executed, and popped off after completion.
+
+        The **Call Stack** would look like this at each stage:
+
+        * **Initial state**:
+
+        ```
+        Global Execution Context (GEC)
+        ```
+
+        * **After calling `square2 = square(n)`**:
+
+        ```
+        Global Execution Context (GEC)
+        Function Execution Context (E1)
+        ```
+
+        * **After returning from `square(n)`**:
+
+        ```
+        Global Execution Context (GEC)
+        ```
+
+        * **After calling `square4 = square(4)`**:
+
+        ```
+        Global Execution Context (GEC)
+        Function Execution Context (E2)
+        ```
+
+        * **Final state**:
+
+        ```
+        Global Execution Context (GEC)
+        ```
+
+        ### **7. The Role of Undefined and Hoisting**
+
+        In JavaScript, variables are **hoisted** to the top of their scope (but only their declarations, not the assignments). This means that:
+
+        * Variables are **created** in the memory but initialized with **undefined**.
+        * Functions, however, are fully hoisted, meaning both their **declaration and code** are hoisted.
+
+        ### **8. Call Stack Management in Depth**
+
+        * **Function calls inside functions** (nested function calls) will add more execution contexts to the call stack.
+        * The JavaScript engine manages the call stack automatically to ensure the execution flows correctly.
+        * When the call stack is **empty**, the program finishes execution.
+
+        ### **9. Recap of the Process**
+
+        1. **Global Execution Context** is created.
+        2. **Memory Creation Phase** happens where variables are assigned `undefined` and functions are hoisted.
+        3. The **Code Execution Phase** starts:
+
+        * Variables are assigned values.
+        * Functions are invoked, creating new Execution Contexts.
+        4. After a function completes execution, its **Execution Context is popped off the stack**.
+        5. The program ends when the **call stack is empty**.
+
+
+   
+
+26. Event Loops?

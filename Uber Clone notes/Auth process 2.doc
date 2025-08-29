@@ -1,0 +1,60 @@
+in Auth Process JWT tokens are used.
+1. Access Tokens-15 mins
+2.Refresh tokens - 30days
+
+
+
+Great question — and your interviewer is basically testing if you understand how to automatically attach the token to every API request in a clean and efficient way (i.e., without writing code again and again).
+
+✅ Simple One-Line Answer (for the Interview):
+“Hum Axios ka interceptor use karte hain — jisse har request ke saath token automatically attach ho jata hai, bina har request me manually likhne ke.”
+
+
+
+Main us token ko ya to React state me ya kisi context me store karta hoon.
+
+Phir main Axios ka interceptor use karta hoon, jisse:
+
+har axios request ke headers me Authorization: Bearer <token> automatically lag jata hai.
+
+mujhe har axios.get() ya axios.post() me manually token bhejna nahi padta.
+
+Isse mera code clean rehta hai, aur secure bhi rehta hai."
+
+✅ Code Jo Interview Me Bata Sakte Ho (Short & Clean):
+js
+Copy
+Edit
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token"); // ya context se le lo
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+🔁 Yeh code kya karta hai?
+Jab bhi Axios se request jati hai...
+
+Interceptor token uthata hai...
+
+Aur usse request ke headers me automatically laga deta hai.
+
+
+
+--
+useLayoutEffect (() .= >{
+const authInterceptor = api. interceptors.request.use((config) .= >{
+config.headers.Authorization =
+!config ._ retry && token
+? 'Bearer ${token}
+: config.headers.Authorization;
+return config;
+});
+
+·return. () ·= >{
+api. interceptors. request.eject(authInterceptor);
+
+}, . [token] )
+
+matlab Token chnage hoga toh Wo wo apne aap request change hogya tha
+isse hume baar baar 

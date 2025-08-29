@@ -1,0 +1,23 @@
+useLayoutEffect(setup, dependencies?)
+
+What is useLayoutEffect?
+It's a React Hook — just like useEffect, but it runs a little earlier in the rendering process.
+
+You can think of it like this:
+
+Hook	When it runs (rough idea)
+useEffect()	After React finishes painting (UI shown)
+useLayoutEffect()	Before the UI is shown on screen
+
+
+
+useLayoutEffect(() => {
+  // setup code runs here
+
+  return () => {
+    // cleanup code runs when component unmounts or dependencies change
+  };
+}, [dependencies]);
+
+useLayoutEffect(setup, deps) lets you run code before anything is shown on screen.
+It's useful when you need to set things up as early as possible, like setting up a token interceptor for API calls.

@@ -1,0 +1,23 @@
+env command to see all the variables
+
+PATH - this is the most important env varaible
+
+Ques- How to set env variable?
+
+--> export custom_env=saurabh
+(this will not available in the environmental variables)
+
+Not to set in the environmental variables we can use one functions
+ Setx VARAIABLE_NAME VALUE
+
+
+# If there is a variable in the parent process then it will automatically pass to the child process
+
+
+# suppose 
+process.env.num=54
+and if we change to process.env.num=12344
+when we run a code it will refelct -12344
+but when you do echo $num  then it will be 54
+this means parent are copying to child process and it wont affect parent
+but we can

@@ -1,0 +1,40 @@
+file 
+folder - drwxwrx (it satrts with d)
+Sybbolic link - lrwxr-xr-x (it starts with l) and it pin points to one file/folder
+
+if we write Example- which pwd
+if we get the path then it means it is a executable files so commands are executable files
+
+**PATHS-
+    Absolute Paths
+    Relative Paths
+
+`
+Commands--(Priority level of checking commands)
+Alias: Bash first checks if the command matches any defined aliases.(priority -1)
+
+Functions: Next, it checks if the command matches any defined shell
+functions.(priority -2)
+
+Built-ins: Then, Bash checks if the command is a built-in shell
+command (like cd, echo, pwd, etc.).(priority -3)
+
+Hash Table: Bash checks its hash table of previously looked
+executables to quickly locate executables.(priority -4)
+
+Executbale files: -Finally , it searches through directoroes listed
+
+
+
+** commands are executbe file
+
+
+
+
+**
+$ type cd
+cd is a function
+cd () 
+{ 
+    echo "My function cd called with argstype cd"
+}

@@ -1,0 +1,35 @@
+<div style="color:green;">
+        <p>My name is saurabh </p>
+        <p>My name is saurabh </p>
+        <p>My name is saurabh </p>
+        <a href="#">I am anchor tag</a>
+        <!-- Yha pe anchor tag ka color change nhi hoga -->
+    </div>
+
+    /* unvisited link */
+    a:link {
+      color: black;
+    }
+    
+    /* visited link */
+    a:visited {
+      color: green;
+    }
+    
+    /* mouse over link */
+    a:hover {
+      color: red;
+    }
+    
+    /* selected link */
+    a:active {
+      color: yellow;
+    }     
+  input:focus is used where we have some input
+    <style>
+        input:focus{
+            border: green solid 5px;
+            background-color: blueviolet ;
+            color: bisque;
+        }
+    </style>

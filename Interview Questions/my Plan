@@ -1,0 +1,100 @@
+🔥 Perfect bhai! Ab sun, mai tujhe **Day-1 se Day-30 ka solid plan** deta hu jo sirf follow karna hai. Agar tu isko daily karega toh interview crack pakka hai.
+
+---
+
+## 📅 30 Days Interview Crack Plan (Frontend Developer)
+
+### 🔹 **Week 1: Foundation Strong Karni Hai**
+
+* **Day 1-2:**
+
+  * JavaScript basics revise: `var vs let vs const`, hoisting, scope, closures, promises.
+  * 2-3 DSA easy problems (array/string).
+
+* **Day 3-4:**
+
+  * DOM manipulation, Event bubbling, debouncing/throttling.
+  * DSA: sorting & searching (2 problems).
+
+* **Day 5-7:**
+
+  * React basics: components, props, state, hooks (`useState`, `useEffect`).
+  * Make small project (To-Do list / Counter app).
+  * DSA: practice objects & maps problems.
+
+---
+
+### 🔹 **Week 2: React Advance + Real Project**
+
+* **Day 8-10:**
+
+  * React Router, Context API, controlled vs uncontrolled components.
+  * Debugging in React (React DevTools).
+  * 2-3 medium DSA problems.
+
+* **Day 11-13:**
+
+  * API integration (fetch/axios), loading states, error handling.
+  * Work on **mini-project: Weather App / Movie App** with API.
+  * DSA: Hashmap + 2 problems.
+
+* **Day 14:**
+
+  * Revise all React concepts learned till now.
+  * Mock interview (mai tere se puchhunga).
+
+---
+
+### 🔹 **Week 3: Job-Ready Skills**
+
+* **Day 15-16:**
+
+  * Authentication: JWT, localStorage vs cookies, protected routes.
+  * DSA: string + sliding window problems.
+
+* **Day 17-18:**
+
+  * Performance optimization: memoization, React.memo, lazy loading, code splitting.
+  * 2 medium DSA problems.
+
+* **Day 19-20:**
+
+  * Version control (Git/GitHub/Azure DevOps basics).
+  * Deployment (Netlify/Vercel).
+  * Mini project deploy kar.
+
+* **Day 21:**
+
+  * Revise HTML, CSS (flexbox, grid, responsiveness).
+  * Mock interview round.
+
+---
+
+### 🔹 **Week 4: Final Interview Prep**
+
+* **Day 22-23:**
+
+  * System design basics (folder structure, API flow, database ka thoda idea).
+  * DSA: 2 problems daily (medium).
+
+* **Day 24-25:**
+
+  * Practice **behavioral interview questions** ("Tell me about yourself", "Roles & Responsibilities", "Project explanation").
+  * Prepare your Zinniax project explanation (mai tujhe frame karwa dunga).
+
+* **Day 26-27:**
+
+  * Full mock interview with coding + project discussion.
+  * Note down weak areas.
+
+* **Day 28-29:**
+
+  * Revise everything (React + JS + Auth + Git + DSA).
+  * Apply to companies daily.
+
+* **Day 30:**
+
+  * Final mock + confidence boost.
+  * Go for interviews. 🚀
+
+---

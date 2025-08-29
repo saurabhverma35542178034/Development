@@ -1,0 +1,91 @@
+Bilkul! Chaliye simple Hindi + code examples ke sath samjhte hain:
+**`.methods`** aur **`.statics`** ka difference kya hai.
+
+---
+
+## 🧠 Short Analogy (Hindi)
+
+### 🔹 `.methods` = "Ek user par kaam karna"
+
+> *"Mujhe is user ka password check karna hai."*
+
+### 🔹 `.statics` = "Saare model par kaam karna"
+
+> *"Mujhe koi bhi password hash karna hai, bina kisi user ke."*
+
+---
+
+## 🔧 Real-Life Example
+
+Maan lo humare paas ek `User` model hai.
+
+### 👉 1. `userSchema.methods.comparePassword`
+
+```js
+userSchema.methods.comparePassword = function (enteredPassword) {
+  return bcrypt.compare(enteredPassword, this.password);
+};
+```
+
+* **Ye ek user ke liye kaam karega.**
+* `this` = current user object
+* 🔁 Compare karega user ka password input se.
+
+### 📦 Use:
+
+```js
+const user = await User.findOne({ email: "test@gmail.com" });
+const isMatch = await user.comparePassword("123456");
+```
+
+---
+
+### 👉 2. `userSchema.statics.hashPassword`
+
+```js
+userSchema.statics.hashPassword = async function (plainPassword) {
+  const salt = await bcrypt.genSalt(10);
+  return await bcrypt.hash(plainPassword, salt);
+};
+```
+
+* **Ye poore User model ke level par kaam karta hai.**
+* Kisi specific user ki zarurat nahi hoti.
+* 🔁 Koi bhi password hash karta hai (e.g., signup time).
+
+### 📦 Use:
+
+```js
+const hashedPwd = await User.hashPassword("123456");
+```
+
+---
+
+## 📋 Simple Table:
+
+| Feature             | `.methods`                                    | `.statics`                             |
+| ------------------- | --------------------------------------------- | -------------------------------------- |
+| Kaam kis par?       | Ek **user/document instance** par             | Poore **Model/User class** par         |
+| `this` kya hai?     | `this = user`                                 | `this = User`                          |
+| Kab use karte hain? | Jab kisi specific user par operation karna ho | Jab generic kaam ho model ke level par |
+
+---
+
+## 🧑‍🏫 Sochne ka Tarika:
+
+* **User ke saath** direct kaam = `.methods`
+  ➤ e.g. `user.comparePassword()`
+
+* **User model ka helper function** = `.statics`
+  ➤ e.g. `User.hashPassword()`
+
+---
+
+Agar aap OOP jaante ho to:
+
+* `.methods` = instance method (per object)
+* `.statics` = static method (per class)
+
+---
+
+Aap chaho to main isko full authentication flow ke sath bhi dikha sakta hoon (signup, login, protect route). Batayein?

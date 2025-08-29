@@ -1,0 +1,4 @@
+when we Parent process start or triggers a child process - This is called spawning.
+
+Process Thread ko create krta hai aur thread jo hai wo alg se memory aur resources use nhi krta hai 
+but wo parent se hi resources leta hai

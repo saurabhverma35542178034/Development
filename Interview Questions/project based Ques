@@ -1,0 +1,34 @@
+1. What versioining tools you used?
+ In my last project, we used Azure DevOps as our version control and project management platform. The repositories inside Azure DevOps are Git-based, so I worked with Git commands for branching, merging, and pull requests, but the code was hosted and managed through Azure Repos.
+
+
+
+Explain your authentication flow.
+👉 JWT with access + refresh token stored in HTTP-only cookie. Login → Server generates tokens → Refresh token issue new access token → Logout clears cookies.
+
+How you managed state in your project?
+👉 Context API + useReducer for small app, Redux for large app (tickets, users).
+
+Error Handling in project?
+👉 Global error boundary + toast notifications on API failure.
+
+How you optimized React performance?
+👉 Lazy loading, React.memo, code splitting, debouncing search.
+
+How you structured your project?
+👉 src/components, src/pages, src/hooks, src/services(api calls), src/context.
+
+How do you secure APIs in frontend?
+👉 HTTP-only cookies, CSRF tokens, rate limiting (backend support).
+
+How do you handle roles & permissions?
+👉 Role stored in JWT payload, React routes protected based on role.
+
+How you tested your frontend?
+👉 Unit tests with Jest/RTL, integration tests for forms, Postman for API.
+
+How you deployed project?
+👉 Build React app → host on Netlify/Vercel/AWS S3 + CloudFront. Backend on AWS EC2.
+
+How do you track errors in production?
+👉 Sentry/New Relic integration + console error logging.

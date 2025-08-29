@@ -1,0 +1,10 @@
+Bash is a Scripting language
+test.sh - bash file, we can write our code here.
+to run a bash file - W ejust have to give file name
+
+I am using Gitbash.txt to to use nano Editor
+Now I am using Vim Editor
+
+Command to do - save --press Esc and then  :w (this will save it)
+command to exit --:q
+
