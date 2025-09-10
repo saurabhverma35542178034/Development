@@ -686,4 +686,237 @@
 
    
 
+
+
+       ISSUES WITH CALLBAKCS:
+        
+        ### 🔄 What Is Inversion of Control in Callbacks?
+
+        Normally, your code dictates what runs and when. But with callbacks:
+
+        - You **pass your function** (the callback) to another function.
+        - That other function decides **when**, **how**, and **how many times** your callback gets executed.
+
+        This means **you lose direct control** over the flow.
+
+        #### 🧠 Example:
+        ```js
+        function processData(data, callback) {
+        // You don't control when this gets called
+        fetchDataFromServer(data, callback);
+        }
+        ```
+
+        Here, `fetchDataFromServer` might be a third-party utility. You trust it to call your `callback` correctly—but what if:
+        - It calls it **multiple times**?
+        - It **never calls it**?
+        - It **throws an error** before calling it?
+
+        That’s the risk of inversion of control.
+
+        ---
+
+        ### ⚠️ Why It’s a Problem
+
+        - **Unpredictable behavior**: You rely on external code to respect your logic.
+        - **Harder debugging**: If something breaks, you don’t know if it’s your code or theirs.
+        - **Tight coupling**: Your logic is now dependent on someone else’s implementation.
+
+        Kyle Simpson (author of *You Don’t Know JS*) calls this one of the **two major problems** with callbacks—the other being **callback hell**.
+
+        ---
+
+        ### ✅ How to Mitigate It
+
+        - Use **Promises** or **async/await**: These give you back control over flow and error handling.
+        - Wrap third-party callbacks in your own abstraction:
+        ```js
+        function safeFetch(url) {
+            return new Promise((resolve, reject) => {
+            thirdPartyFetch(url, (err, data) => {
+                if (err) return reject(err);
+                resolve(data);
+            });
+            });
+        }
+        ```
+
+
+
+
 26. Event Loops?
+
+    https://www.youtube.com/watch?v=8zKuNo4ay8E&t=1968s
+    javascript is Synchrous single threaded language and it has 1 call stack and all codes executed in Stack.
+    1. Call Stack
+    2. Call back queue
+    3. Micro stack
+
+26. Callbacks?
+
+        ISSUES WITH CALL BACKS:-
+        1. Call Back Hells:
+ 
+        2. ### **What is Inversion of Control (IoC) in Callbacks?**
+
+        **Inversion of Control (IoC)** refers to a design principle where you **lose control** over the flow of execution in your code. This is particularly relevant when using **callbacks** in JavaScript.
+
+        #### 🔄 The Problem with Callbacks and IoC
+
+        When you use **callbacks**, you essentially **hand over control** to another function (often from a third-party library or utility). Here's how:
+
+        * You write a function that expects another function (the callback) to be passed in.
+        * You call that external function, but the external function decides **when** to invoke the callback, **how** to invoke it, and how many times to invoke it.
+
+        In other words, you give **control of your code’s execution** to an external party, which could be a library or an API. This creates uncertainty because you no longer control when or how the callback will run.
+
+        ---
+
+        ### ⚠️ **Why Is It a Problem?**
+
+        1. **Unpredictable Behavior**:
+
+        * The external function can call the callback **multiple times** (or never call it).
+        * It might throw an error before calling the callback.
+        * If it’s a third-party library, you can’t fully predict how or when it will execute the callback, making your program’s behavior less predictable.
+
+        2. **Harder Debugging**:
+
+        * If something goes wrong, you may not know whether the issue lies in **your code** or the external function. This makes debugging more difficult.
+
+        3. **Tight Coupling**:
+
+        * Your code is now tightly coupled to the behavior of another function (external). If the external function changes or breaks, it can mess up your entire code.
+        * You depend on the external function’s **execution order** and **logic**.
+
+        ---
+
+        ### ✅ **How to Mitigate Inversion of Control (IoC)**
+
+        The good news is there are ways to **mitigate** this problem by regaining control of the execution flow. Here are two main strategies:
+
+        #### 1. **Use Promises or `async/await`**
+
+        Promises and `async/await` allow you to **control the flow** of your code, making it easier to handle asynchronous behavior.
+
+        * **Promises** are objects that represent the result of an asynchronous operation and let you chain `.then()` and `.catch()` handlers.
+        * `async/await` is a more recent syntax that makes working with asynchronous code **look synchronous**, giving you more control over when the code is executed.
+
+        These two constructs allow you to manage the result of asynchronous operations more easily and ensure that your code’s execution flow is under **your control**.
+
+        #### 2. **Wrap External Callbacks in Your Own Abstraction**
+
+        Another way to regain control is to **wrap third-party callbacks** in your own promise-based abstraction.
+
+        ##### Example:
+
+        ```js
+        function safeFetch(url) {
+        return new Promise((resolve, reject) => {
+            thirdPartyFetch(url, (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+            });
+        });
+        }
+        ```
+
+        * `thirdPartyFetch` is an external function that uses a callback pattern.
+        * Inside `safeFetch`, you convert this callback into a **Promise** to regain control of when and how the code executes.
+        * This way, you wrap the unpredictable behavior of `thirdPartyFetch` inside a **controlled** promise, so you can **predict** the flow and handle errors more cleanly.
+
+        ---
+
+        ### **Why Use Promises Instead of Callbacks?**
+
+        * **Promises** allow you to **control** the execution flow. You can chain multiple asynchronous operations in sequence (`.then()`), which gives you a **structured and linear flow**.
+        * Callbacks lead to **callback hell** (deeply nested functions) and are prone to **Inversion of Control**, making the code more difficult to reason about.
+
+        With promises, you don’t pass control of the flow to another function. Instead, you define how your logic will proceed, making it **easier to follow** and **debug**.
+
+        ---
+
+        ### **Summary**
+
+        * **Inversion of Control (IoC)** is a problem in callbacks where you lose control of the flow of your code.
+        * This can cause **unpredictable behavior**, **difficult debugging**, and **tight coupling** between your code and third-party functions.
+        * You can **mitigate** this by using **Promises** or `async/await`, which **give you back control** over the flow of your program.
+        * You can also **wrap external callbacks in promises**, which lets you control the execution and handle errors properly.
+
+        ---
+
+        #### 💡 In essence, **Promises** are a tool to regain control over asynchronous behavior, making your code cleaner, more predictable, and easier to manage.
+
+
+
+
+
+
+27. Promises  ?  
+    https://www.youtube.com/watch?v=U74BJcr8NeQ
+    It is a Object . promise objects are immutable
+    It has 3 states : Pending , Rejected , fullfilled
+    Promise is an object representing the eventual completion or failure of async operation.
+    There is Promise chaining where we have resolve the issue of call back hell
+    What is a Promise in JavaScript?
+
+        A Promise is an object that represents the eventual completion (or failure) of an asynchronous operation and its resulting value. It essentially acts as a placeholder for a future value, which is resolved when the asynchronous operation completes.
+
+        Placeholder for a value: Some call it a placeholder for a value that will come later.
+
+        Container for a future value: Some describe it as a container that will eventually hold a value after the asynchronous operation.
+
+        MDN definition: A Promise is an object representing the eventual completion of an asynchronous operation. It has three states:
+
+        Pending: The operation is still ongoing.
+
+        Fulfilled: The operation was successful, and the value is available.
+
+        Rejected: The operation failed, and the error is available.
+
+        Why Promises?
+
+        Promises help to address issues that arise with callbacks, such as:
+
+        Inversion of control: With callbacks, you're passing control of your code to another function. Promises ensure that you have control over your asynchronous operations.
+
+        Callback Hell: With callbacks, nested functions become harder to read and maintain. Promises solve this with a cleaner, chainable structure.
+
+        Promise Chaining
+
+        When multiple asynchronous operations depend on each other (e.g., create an order, proceed to payment, show order summary), callbacks lead to messy, hard-to-maintain code, often called Callback Hell or Pyramid of Doom.
+
+        Promise chaining helps solve this by allowing us to attach multiple .then() handlers. Each handler gets executed when the previous promise resolves, keeping the code neat and linear.
+
+        Example:
+        createOrder()
+        .then(proceedToPayment)
+        .then(showOrderSummary)
+        .then(updateWalletBalance)
+        .catch(error => console.error(error));
+
+        Common Mistakes in Promise Chaining
+
+        Missing return: In a chain, you need to return the promise from each .then() to ensure data flows properly through the chain. Without returning the promise, data might be lost.
+
+        Arrow functions: Some prefer using arrow functions to make the code cleaner and avoid explicit return statements.
+
+        Advantages of Promises
+
+        Cleaner code: Promises make asynchronous code more readable and maintainable compared to callbacks.
+
+        Control flow: Promises give more control over when to execute actions, avoid inversion of control, and reduce callback hell.
+
+        Error handling: Promises offer better error handling by using .catch() or try/catch in async functions.
+
+        Interview Answer Example
+
+        What is a Promise?
+        "A Promise is an object representing the eventual completion of an asynchronous operation."
+
+        Why use Promises?
+        Promises are important because they simplify asynchronous code, avoid callback hell, and help maintain cleaner, more readable, and manageable code.
+
+
+        **********
+        Creating a Promise**

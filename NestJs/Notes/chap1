@@ -1,0 +1,12 @@
+Nest js has a particular Architecture
+Module -> controller - > provider
+
+Modules are the mainly a box wrapping all the  closely or similar end points.
+
+for e,g POST 
+    create post 
+    update post
+    delete post
+    get post 
+
+Nest Js me ek route module hota hai    

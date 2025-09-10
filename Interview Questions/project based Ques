@@ -4,7 +4,7 @@
 
 
 Explain your authentication flow.
-👉 JWT with access + refresh token stored in HTTP-only cookie. Login → Server generates tokens → Refresh token issue new access token → Logout clears cookies.
+    👉 JWT with access + refresh token stored in HTTP-only cookie. Login → Server generates tokens → Refresh token issue new access token → Logout clears cookies.
 
 How you managed state in your project?
 👉 Context API + useReducer for small app, Redux for large app (tickets, users).

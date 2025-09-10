@@ -1,19 +1,37 @@
-console.log(a);
-console.log(square);
-console.log(sq1);
-console.log(x);
-
-
-
-
-
-var a=2;
-let x=5;
-function square(n)
-{    
-    
-     return n*n;
+function addANumber(n) {
+    return new Promise(function(resolve, reject) {
+        if (n === 5)
+            reject(5);
+        else
+            resolve(n);
+    });
 }
 
-var sq1=square(a);
-var sq2=square(x);
+function multiplyBy(num) {
+    return new Promise(function(resolve) {
+        resolve(num * 2);
+    });
+}
+
+addANumber(5)
+    .then(function(n) {
+        console.log("addANumber resolved:");
+        return n; // You can return a number to pass to multiplyBy
+    })
+    .then(function(num) {
+       console.log("Multiply");
+       
+        return multiplyBy(num);
+    })
+    .catch(function(err) {
+        console.log("Caught error:", err);
+    })
+    .then(function(result) {
+        console.log("multiplyBy result:", result);
+    })
+    .catch(function(err) {
+        console.log("Caught error:", err);
+    }).then(function(){
+     console.log("End of the chain");
+     
+    });
