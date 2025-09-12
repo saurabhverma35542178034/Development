@@ -1,0 +1,12 @@
+When class A uses some functionality of class B, then it is said
+that class A has a dependency of class B.
+
+To use class B we need to create its object first
+const b = new B()
+
+But what if B also depends on class C, then we need another
+object and so on
+
+So, transferring the task of creating the object to someone else
+and directly using the dependency is called dependency
+injection.

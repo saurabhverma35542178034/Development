@@ -1,0 +1,3 @@
+@nestjs/mongoose: A NestJS package for integrating Mongoose.
+
+mongoose: A popular Node.js ODM (Object Document Mapper) for MongoDB.
