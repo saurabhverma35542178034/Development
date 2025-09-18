@@ -131,11 +131,233 @@ type abc = number | string; // cannot be re-declared
 // CLASSES OBJECT ORIENTED PROGRAMMING
 
 
+class Animal{
+    constructor(name:string,age:number){
+        // console.log(`Animal name is ${name} and age is ${age}`);
+        
+    }
+}
+
+let objAnimal= new Animal("dog",3);
+// console.log(objAnimal);
+
+class BottleMaker{
+    constructor(public color:string,public type:string="plastic",private price:number){
+        // console.log(`Bottle color is ${color}, type is ${type} and price is ${price}`);
+     }
+}
+
+let b1=new BottleMaker("red","plastic",200);
+let b2=new BottleMaker("red",undefined,200);
+b1.color="blue"; // we can access public property
+// console.log(b1.color,b1.type); // we can access public property
+
+class Abcd
+{ // public keyword - Make these parameters class properties and assign them automatically.”
+    constructor(public name:string,age:number){
+        // console.log(name);
+        
+    }
+    // console.log(this); we can not use console outside methods
+
+    consoleLog(){
+        // console.log(this.name);
+        
+    }
+    
+}
+let objAbcd=new Abcd("harsh",20);
+objAbcd.consoleLog();
 
 
-   
+class PersonClass{
+    constructor(public name:string){
+        // console.log(name);
+        
+    }
+}
+let obj= new PersonClass("harsh");
+
+// Public Private Protected
+// public - can be accessed anywhere, can be accesed from inherteince , inside a class , inside a subclass , method inside a class ,inside constructor , outisde a class
+// private - can be accessed only inside a class, cannot be accessed from inherteince , inside a class , inside a subclass , method inside a class ,inside constructor , outisde a class
+
+
+class Information{
+    constructor(public name:string, private adhaar:number,protected age:number, public readonly country:string){
+        //  console.log("Construtor",name,adhaar,age);
+    }
+    display(){
+        // console.log("Method",this.name,this.adhaar,this.age);   
+    }
+    this.name="harsh"; // we can access public property
+}
+
+class SubInformation extends Information{
+    constructor(name:string,adhaar:number,age:number,country){
+        super(name,adhaar,age,country);
+        console.log("SubClass",this.name,this.age, this.adhaar); // we can access public and protected property
+        // console.log(this.adhaar); // we cannot access private property
+    }
+}
+
+let Info=new Information("harsh",123456789012,20,"India");
+
+let SubInfo=new SubInformation("harsh",123456789012,20,"India");
+
+Info.name="sharma"; // we can access public property
+Info.adhaar=123456789013; // we cannot access private property
+Info.age=21; // we cannot access protected property
+Info.country="USA"; // we cannot access readonly property
+// console.log(Info.name);
+// console.log(Info.adhaar);
+// console.log(Info.age);
+// console.log(Info.country);
 
 
 
+// getters and setters
+
+class Employee{
+    constructor(private _fullName:string,private _age:number){}
+
+    get fullname():string{
+        return this._fullName;
+    }
+
+    set fullname(name:string){
+        this._fullName=name;
+    }
+}
+
+let emp=new Employee("harsh",20);
+
+// console.log(emp.fullname);
+emp.fullname="sharma";
+// console.log(emp.fullname);
+
+
+// Static properties and methods
+class Car{
+    static numberOfCars:number=0;
+    constructor(public model:string){
+        Car.numberOfCars++;
+    }
+    static getNumberOfCars():number{
+        return Car.numberOfCars;
+    }
+}
+
+let car1=new Car("BMW");
+let car2=new Car("Audi");
+// console.log(Car.getNumberOfCars());
+// console.log(Car.numberOfCars);
+
+
+
+
+// FUNCTIONS
+
+function RandomFun(name:string,age:number , cb:()=>void )
+{
+     cb();
+}
+
+//RandomFun("Vermaa",23, ()=>console.log("hello"));
+
+
+
+// spread parametrs
+
+function SpreadOperator(a:number,...b:any)
+{
+    // console.log(b);
+    
+}
+
+SpreadOperator(1,2,3,4,5,6);
+
+// functions over loading
+/* 
+functions with same name but different parameters
+
+function add(a:number,b:number):number;
+function add(a:string,b:string):string;
+*/
+function add(a:any,b:any):any{
+    return a+b;
+}
+
+
+// generics Functions
+
+// function generic<T>(a:T)
+// {
+//    console.log(a.length);
+    
+    
+// }
+
+// generic  (12);
+// generic  ("saurabh");
+
+
+function generic<T extends { length: number }>(a: T) {
+  console.log(a.length);
+}
+
+generic  (12);
+generic  ("saurabh");
+
+// function wrap(value: any): any[] {
+//   return [value];
+// }
+
+// const result = wrap("hello");
+// result[0].toUpperCase(); // ✅ Works
+
+// const broken = wrap(42);
+// broken[0].toUpperCase(); // ❌ Runtime error — no warning
+
+
+function wrapInArray<T>(value: T): T[] {
+  return [value];
+}
+
+const safe = wrapInArray(42);
+// safe[0].toUpperCase(); // ❌ Compile-time error — TypeScript warns you
+
+
+
+//Interface with generic
+interface Animal<T>
+{
+    API:string,
+    PASS:T
+}
+
+function APIdata<T>(animal:Animal<T>):string{
+   return animal.API;
+}
+// console.log(APIdata({API:"Saurabh", PASS:2}));
+
+
+// Class with generic
+
+class Food<T,Q>{
+    constructor(public name:T,public quantity:Q){
+        console.log(name,quantity);
+        
+    }
+
+}
+let f1= new Food("Pizza","2");
+let f2= new Food( "Burger",3);
+
+
+function abcd<T>(a: T, b: T): T {
+        return "hey"; // Error: Type 'string' is not assignable to type 'T'
+}
+abcd<string>("hey", "hello");
 
 
